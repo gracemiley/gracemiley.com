@@ -725,79 +725,75 @@ footer {
 </footer>
 
 <script>
-const projects = [
-  { num:'01', title:'go with your gut bag', label:'soft goods · fabrication · product design', desc:'a hand-designed and sewn bag exploring personal intuition vs. corporate hive mentality. part of the ant farm office brand — made by grace.', image:'/images/bagpic1.webp', link:'go-with-your-gut-bag.html' },
-  { num:'02', title:'ant farm office', label:'wearables · branding · soft goods', desc:'a wearable brand exploring personal intuition vs. corporate hive mindset. the go with your gut bag — designed and sewn by grace.', image:'/images/ArwynCoverphotoforMIRO (1).webp', link:'ant-farm-office.html' },
-  { num:'03', title:'gria studio', label:'branding · identity · creative direction · product design', desc:'a multi-disciplinary design studio co-founded with mia bookstaber — branding, creative direction, and product design.', image:'/images/Artboard 15gs2 (1).webp', link:'gria-studio.html' },
-  { num:'04', title:'gjso soundscapes', label:'branding · graphic design · print · identity system', desc:'a full season identity system for the grand junction symphony orchestra's 47th season — posters, banners, brochures, and merch across 8 concerts.', image:'/images/Mockup (2).webp', link:'gjso-soundscapes.html' },
-  { num:'05', title:'nrhh swoop chapter', label:'branding · identity · social media · merch · illustration', desc:'creative director for the university of utah's nrhh chapter — logo, merch, event graphics, and a full social media campaign.', image:'/images/phonebig.webp', link:'nrhh-swoop.html' },
-  { num:'06', title:'shaped by water', label:'branding · print · exhibition · toy design · fabrication', desc:'a semester-long brand and merchandise system inspired by the history of the great salt lake — posters, pamphlets, hand-cast resin and crayon toys.', image:'/images/SBWposterpromotion11102.webp', link:'shaped-by-water.html' },
-  { num:'07', title:'digital threads', label:'editorial design · publication · ux · social impact', desc:'an interactive digital zine helping newcomers navigate resettlement resources and digital literacy — presented at the irc's tech confluence in new york city.', image:'/images/Digitalthreadsmockup.webp', link:'digital-threads.html' },
-  { num:'08', title:'object + play', label:'event design · print · editorial · illustration · branding', desc:'logo, zine, poster, price list, and social campaign for a gala showcasing nine artists at the gala in salt lake city.', image:'/images/Objectandplayhero.webp', link:'object-and-play.html' },
-  { num:'09', title:'missing piece / fleur', label:'product design · branding · packaging · 3d · design research', desc:'a full product redesign of phlur's viral fragrance — repositioned from grief to ambition. new packaging, identity, bottle design, and tech packs.', image:'/images/FinalImage (2).webp', link:'missing-piece-fleur.html' },
-  { num:'10', title:'barriers', label:'game design · 3d · installation · character design · print · interactive', desc:'a site-specific video game projected onto real cave walls in millcreek canyon — with hand-built arduino controller, low-poly characters, and an original narrative.', image:'/images/0BF9B406-0839-49D8-AE76-B746DA3AA7C1 (1).webp', link:'barriers.html' }
-];
+(function() {
+  var data = [
+    { n:'01', t:'go with your gut bag', l:'soft goods · fabrication · product design', d:'a hand-designed and sewn bag exploring personal intuition vs. corporate hive mentality. part of the ant farm office brand — made by grace.', img:'/images/bagpic1.webp', url:'go-with-your-gut-bag.html' },
+    { n:'02', t:'ant farm office', l:'wearables · branding · soft goods', d:'a wearable brand exploring personal intuition vs. corporate hive mindset. the go with your gut bag — designed and sewn by grace.', img:'/images/ArwynCoverphotoforMIRO (1).webp', url:'ant-farm-office.html' },
+    { n:'03', t:'gria studio', l:'branding · identity · creative direction · product design', d:'a multi-disciplinary design studio co-founded with mia bookstaber — branding, creative direction, and product design.', img:'/images/Artboard 15gs2 (1).webp', url:'gria-studio.html' },
+    { n:'04', t:'gjso soundscapes', l:'branding · graphic design · print · identity system', d:"a full season identity system for the grand junction symphony orchestra's 47th season — posters, banners, brochures, and merch across 8 concerts.", img:'/images/Mockup (2).webp', url:'gjso-soundscapes.html' },
+    { n:'05', t:'nrhh swoop chapter', l:'branding · identity · social media · merch · illustration', d:"creative director for the university of utah's nrhh chapter — logo, merch, event graphics, and a full social media campaign.", img:'/images/phonebig.webp', url:'nrhh-swoop.html' },
+    { n:'06', t:'shaped by water', l:'branding · print · exhibition · toy design · fabrication', d:'a semester-long brand and merchandise system inspired by the history of the great salt lake — posters, pamphlets, hand-cast resin and crayon toys.', img:'/images/SBWposterpromotion11102.webp', url:'shaped-by-water.html' },
+    { n:'07', t:'digital threads', l:'editorial design · publication · ux · social impact', d:"an interactive digital zine helping newcomers navigate resettlement resources and digital literacy — presented at the irc's tech confluence in new york city.", img:'/images/Digitalthreadsmockup.webp', url:'digital-threads.html' },
+    { n:'08', t:'object + play', l:'event design · print · editorial · illustration · branding', d:'logo, zine, poster, price list, and social campaign for a gala showcasing nine artists at the gala in salt lake city.', img:'/images/Objectandplayhero.webp', url:'object-and-play.html' },
+    { n:'09', t:'missing piece / fleur', l:'product design · branding · packaging · 3d · design research', d:"a full product redesign of phlur's viral fragrance — repositioned from grief to ambition. new packaging, identity, bottle design, and tech packs.", img:'/images/FinalImage (2).webp', url:'missing-piece-fleur.html' },
+    { n:'10', t:'barriers', l:'game design · 3d · installation · character design · print · interactive', d:'a site-specific video game projected onto real cave walls in millcreek canyon — with hand-built arduino controller, low-poly characters, and an original narrative.', img:'/images/0BF9B406-0839-49D8-AE76-B746DA3AA7C1 (1).webp', url:'barriers.html' }
+  ];
 
-let current = 0;
-const bg = document.getElementById('heroBg');
-const heroLabelEl = document.getElementById('heroLabel');
-const heroTitleEl = document.getElementById('heroTitle');
-const heroDescEl = document.getElementById('heroDesc');
-const heroBtnEl = document.getElementById('heroBtn');
-const heroDotsEl = document.getElementById('heroDots');
-const heroSidebarEl = document.getElementById('heroSidebar');
-const sideNum = document.getElementById('sideNum');
+  var cur = 0;
+  var timer = null;
 
-let autoTimer = null;
+  var elBg      = document.getElementById('heroBg');
+  var elLabel   = document.getElementById('heroLabel');
+  var elTitle   = document.getElementById('heroTitle');
+  var elDesc    = document.getElementById('heroDesc');
+  var elBtn     = document.getElementById('heroBtn');
+  var elDots    = document.getElementById('heroDots');
+  var elSidebar = document.getElementById('heroSidebar');
+  var elNum     = document.getElementById('sideNum');
 
-function update(idx, fromAuto) {
-  current = idx;
-  const p = projects[idx];
-  bg.classList.add('fade-out');
-  setTimeout(function() {
-    bg.style.backgroundImage = 'url(' + p.image + ')';
-    bg.classList.remove('fade-out');
-  }, 350);
-  heroLabelEl.textContent = p.label;
-  heroTitleEl.textContent = p.title;
-  heroDescEl.textContent = p.desc;
-  heroBtnEl.href = p.link;
-  sideNum.textContent = p.num + ' / 10';
-  document.querySelectorAll('.hero-dot').forEach(function(d,i) { d.classList.toggle('active', i===idx); });
-  document.querySelectorAll('.side-item').forEach(function(s,i) { s.classList.toggle('active', i===idx); });
-  if (!fromAuto) resetAutoTimer();
-}
+  if (!elBg) return;
 
-function resetAutoTimer() {
-  if (autoTimer) clearInterval(autoTimer);
-  autoTimer = setInterval(function() { update((current + 1) % projects.length, true); }, 6000);
-}
+  // Preload all images
+  data.forEach(function(p) { var i = new Image(); i.src = p.img; });
 
-projects.forEach(function(p, i) {
-  const dot = document.createElement('button');
-  dot.className = 'hero-dot' + (i===0 ? ' active' : '');
-  dot.onclick = function() { update(i); };
-  heroDotsEl.appendChild(dot);
+  function show(idx) {
+    cur = idx;
+    var p = data[idx];
+    elBg.style.backgroundImage = 'url("' + p.img + '")';
+    elLabel.textContent  = p.l;
+    elTitle.textContent  = p.t;
+    elDesc.textContent   = p.d;
+    elBtn.href           = p.url;
+    elNum.textContent    = p.n + ' / 10';
+    document.querySelectorAll('.hero-dot').forEach(function(d,i){ d.classList.toggle('active', i===idx); });
+    document.querySelectorAll('.side-item').forEach(function(s,i){ s.classList.toggle('active', i===idx); });
+  }
 
-  const item = document.createElement('div');
-  item.className = 'side-item' + (i===0 ? ' active' : '');
-  item.innerHTML = '<div class="side-dot"></div><div class="side-tooltip">' + p.num + ' — ' + p.title + '</div>';
-  item.onclick = function() { update(i); };
-  heroSidebarEl.insertBefore(item, sideNum);
-});
+  function startTimer() {
+    clearInterval(timer);
+    timer = setInterval(function(){ show((cur+1) % data.length); }, 6000);
+  }
 
-// Preload all hero images for instant switching
-projects.forEach(function(p) {
-  var img = new Image();
-  img.src = p.image;
-});
+  // Build dots
+  data.forEach(function(p, i) {
+    var dot = document.createElement('button');
+    dot.className = 'hero-dot' + (i===0?' active':'');
+    dot.addEventListener('click', function(){ show(i); startTimer(); });
+    elDots.appendChild(dot);
+  });
 
-// Set first project immediately without fade
-if (bg) {
-  bg.style.backgroundImage = 'url(' + projects[0].image + ')';
-}
-update(0, true);
-resetAutoTimer();
+  // Build sidebar items
+  data.forEach(function(p, i) {
+    var item = document.createElement('div');
+    item.className = 'side-item' + (i===0?' active':'');
+    item.innerHTML = '<div class="side-dot"></div><div class="side-tooltip">' + p.n + ' — ' + p.t + '</div>';
+    item.addEventListener('click', function(){ show(i); startTimer(); });
+    elSidebar.insertBefore(item, elNum);
+  });
+
+  show(0);
+  startTimer();
+})();
 </script>
 </body>
 </html>
