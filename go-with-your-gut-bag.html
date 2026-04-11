@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' fill='%232C1A0E'/><text x='50%' y='50%' dominant-baseline='central' text-anchor='middle' font-family='DM Sans,sans-serif' font-weight='500' font-size='13' fill='%23FAFAF5'>gm</text></svg>">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>shaped by water — grace miley</title>
+<title>go with your gut bag — grace miley</title>
 <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="style.css">
 </head>
@@ -21,24 +21,24 @@
 </header>
 
 <div class="project-gallery">
-<img class="gallery-main" src="images/SBWposterpromotion11102.webp" alt="shaped by water" loading="eager">
+<img class="gallery-main" src="images/bagpic1.webp" alt="go with your gut bag" loading="eager">
 <div class="gallery-thumbs">
-  <img class="gallery-thumb" src="images/SBWposterpromotion119 (1).webp" alt="shaped by water poster" loading="lazy" decoding="async">
-  <img class="gallery-thumb" src="images/SBWpostcard1110.webp" alt="salt flats poster" loading="lazy" decoding="async">
-  <img class="gallery-thumb" src="images/IMG_9915 (1) (2).webp" alt="hand-cast hexagon toys" loading="lazy" decoding="async">
-  <img class="gallery-thumb" src="images/SBWpamphlet.webp" alt="trifold pamphlet" loading="lazy" decoding="async">
+  <img class="gallery-thumb" src="images/ArwynCoverphotoforMIRO (1).webp" alt="editorial shoot" loading="lazy" decoding="async">
+  <img class="gallery-thumb" src="images/IMG_1186.webp" alt="bag detail" loading="lazy" decoding="async">
+  <img class="gallery-thumb" src="images/render9 (1).webp" alt="render" loading="lazy" decoding="async">
+  <img class="gallery-thumb" src="images/1940A1B8-6DFC-45C9-9F28-C3A8C2C62551_1_105_c (1).webp" alt="go with your gut bag" loading="lazy" decoding="async">
 </div>
 </div>
 
 <div class="project-intro">
   <div>
-    <div class="project-title">shaped by water</div>
-    <p class="project-desc">a semester-long brand and merchandise system inspired by the history of the great salt lake. the project spans posters, pamphlets, hand-cast resin and crayon toys, and a full event campaign — drawing on the lake's geological and cultural history to create a visual system that is earthy, tactile, and deeply specific to place.</p>
+    <div class="project-title">go with your gut bag</div>
+    <p class="project-desc">a hand-designed and sewn bag exploring the tension between personal intuition and corporate conformity. part of the ant farm office brand — the go with your gut bag is both a functional object and a conceptual statement about trusting yourself in a world that rewards hive mentality.</p>
   </div>
   <div class="project-meta">
     <div class="project-meta-row">
       <span class="project-meta-label">category</span>
-      <span class="project-meta-value">branding · print · exhibition · toy design · fabrication</span>
+      <span class="project-meta-value">soft goods · fabrication · product design</span>
     </div>
     <div class="project-meta-row">
       <span class="project-meta-label">studio</span>
@@ -46,17 +46,19 @@
     </div>
     <div class="project-meta-row">
       <span class="project-meta-label">deliverables</span>
-      <span class="project-meta-value">posters · pamphlets · hand-cast toys · event campaign</span>
+      <span class="project-meta-value">bag design · hand fabrication · photography</span>
+    </div>
+    <div class="project-meta-row">
+      <span class="project-meta-label">shop</span>
+      <span class="project-meta-value"><a href="https://griadesign.com/shop/buy" target="_blank" style="color: var(--hot-pink); border-bottom: 1px solid var(--hot-pink); padding-bottom: 1px;">inquire to purchase →</a></span>
     </div>
   </div>
 </div>
 
-
-
 <div class="project-nav">
-  <a href="nrhh-swoop.html">← nrhh swoop chapter</a>
-  <span class="project-nav-center">05 / 10</span>
-  <a href="digital-threads.html">next project →</a>
+  <a href="work.html">← all work</a>
+  <span class="project-nav-center">01 / 10</span>
+  <a href="ant-farm-office.html">next project →</a>
 </div>
 
 <footer>
@@ -75,7 +77,6 @@
 <script src="main.js"></script>
 
 <script>
-// Gallery functionality
 (function() {
   var thumbs = document.querySelectorAll('.gallery-thumb');
   var mainImg = document.querySelector('.gallery-main');
@@ -90,10 +91,7 @@
 
   function setMain(idx) {
     curIdx = idx;
-    if (mainImg && images[idx]) {
-      mainImg.src = images[idx].src;
-      mainImg.alt = images[idx].alt;
-    }
+    if (mainImg && images[idx]) { mainImg.src = images[idx].src; mainImg.alt = images[idx].alt; }
     thumbs.forEach(function(t, i) { t.classList.toggle('active', i === idx - 1); });
   }
 
