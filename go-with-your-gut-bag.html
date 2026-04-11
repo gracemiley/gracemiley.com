@@ -21,7 +21,7 @@
 </header>
 
 <div class="project-gallery">
-<img class="gallery-main" src="images/bagpic1.webp" alt="go with your gut bag" loading="eager">
+<div class="gallery-main-wrap"><img class="gallery-main" src="images/bagpic1.webp" alt="go with your gut bag" loading="eager"><div class="gallery-zoom-hint">click to expand</div></div>
 <div class="gallery-thumbs">
   <img class="gallery-thumb" src="images/ArwynCoverphotoforMIRO (1).webp" alt="editorial shoot" loading="lazy" decoding="async">
   <img class="gallery-thumb" src="images/IMG_1186.webp" alt="bag detail" loading="lazy" decoding="async">
@@ -95,9 +95,8 @@
     thumbs.forEach(function(t, i) { t.classList.toggle('active', i === idx - 1); });
   }
 
-  thumbs.forEach(function(t, i) { t.addEventListener('click', function() { setMain(i + 1); }); });
+  thumbs.forEach(function(t, i) { t.addEventListener('click', function() { setMain(i + 1); openLb(i + 1); }); });
   if (mainImg) { mainImg.addEventListener('click', function() { openLb(curIdx); }); }
-  thumbs.forEach(function(t, i) { t.addEventListener('click', function() { openLb(i + 1); }); });
 
   function openLb(idx) {
     if (!lightbox) return;
@@ -106,12 +105,24 @@
     lbImg.alt = images[idx].alt;
     if (lbCaption) lbCaption.textContent = (idx + 1) + ' / ' + images.length;
     lightbox.classList.add('open');
+    lightbox.classList.remove('maximized');
     document.body.style.overflow = 'hidden';
   }
 
-  window.closeLightbox = function() { lightbox && lightbox.classList.remove('open'); document.body.style.overflow = ''; };
+  window.closeLightbox = function() {
+    if (!lightbox) return;
+    lightbox.classList.remove('open');
+    lightbox.classList.remove('maximized');
+    document.body.style.overflow = '';
+  };
   window.lbPrev = function() { openLb((curIdx - 1 + images.length) % images.length); };
   window.lbNext = function() { openLb((curIdx + 1) % images.length); };
+  window.lbMaximize = function() {
+    if (!lightbox) return;
+    lightbox.classList.toggle('maximized');
+    var btn = document.getElementById('lbMaxBtn');
+    if (btn) btn.textContent = lightbox.classList.contains('maximized') ? '⊡ restore' : '⊞ maximize';
+  };
 
   if (lightbox) {
     lightbox.addEventListener('click', function(e) { if (e.target === lightbox) closeLightbox(); });
@@ -120,6 +131,7 @@
       if (e.key === 'Escape') closeLightbox();
       if (e.key === 'ArrowLeft') lbPrev();
       if (e.key === 'ArrowRight') lbNext();
+      if (e.key === 'f' || e.key === 'F') lbMaximize();
     });
   }
 })();
@@ -127,10 +139,10 @@
 
 <div class="gallery-lightbox" id="galleryLightbox">
   <button class="gallery-lightbox-close" onclick="closeLightbox()">&#215;</button>
+  <button class="gallery-maximize-btn" id="lbMaxBtn" onclick="lbMaximize()">&#8862; maximize</button>
   <button class="gallery-lightbox-prev" onclick="lbPrev()">&#8592;</button>
   <img id="lbImg" src="" alt="">
   <button class="gallery-lightbox-next" onclick="lbNext()">&#8594;</button>
   <div class="gallery-caption" id="lbCaption"></div>
 </div>
 </body>
-</html>

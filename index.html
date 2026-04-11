@@ -96,7 +96,7 @@ header.dark-header nav a:hover { color: var(--off-white); }
   background-size: cover;
   background-position: center center;
   background-repeat: no-repeat;
-  transition: opacity 0.5s ease;
+  transition: opacity 0.7s ease;
 }
 
 .hero-text {
@@ -536,7 +536,6 @@ footer {
   text-transform: lowercase;
 }
 .gria-pill-wrap:hover .gria-callout { opacity: 1; }
-.hero-bg { transition: opacity 0.7s ease; }
 .hero-bg.fade-out { opacity: 0; }
 
 /* about section */
@@ -793,6 +792,10 @@ projects.forEach(function(p) {
   img.src = p.image;
 });
 
+// Set first project immediately without fade
+if (bg) {
+  bg.style.backgroundImage = 'url(' + projects[0].image + ')';
+}
 update(0, true);
 resetAutoTimer();
 </script>
