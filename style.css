@@ -37,23 +37,31 @@ header {
   justify-content: space-between;
   padding: 20px 28px;
   pointer-events: none;
+  transition: background 0.3s, border-color 0.3s;
 }
 
+/* Non-hero pages: solid immediately via JS */
 header.solid {
   background: var(--off-white);
   border-bottom: 1px solid rgba(44,26,14,0.08);
 }
 
-header.solid .logo { color: var(--brown); }
-header.solid nav a { color: rgba(44,26,14,0.6); }
-header.solid nav a:hover { color: var(--brown); }
+header.solid .logo { color: var(--brown) !important; }
+header.solid nav a { color: rgba(44,26,14,0.6) !important; }
+header.solid nav a:hover { color: var(--brown) !important; }
+header.solid nav a.active { color: var(--hot-pink) !important; }
+
+/* Dark header override — used on hero pages before scroll */
+header.dark-header .logo { color: var(--off-white); }
+header.dark-header nav a { color: rgba(250,250,245,0.75); }
+header.dark-header nav a:hover { color: var(--off-white); }
 
 header * { pointer-events: all; }
 
 .logo {
   font-size: 14px;
   font-weight: 500;
-  color: var(--off-white);
+  color: var(--brown);
   letter-spacing: 0.02em;
   transition: color 0.3s;
 }
@@ -63,12 +71,12 @@ nav { display: flex; gap: 28px; }
 nav a {
   font-size: 12px;
   font-weight: 400;
-  color: rgba(250,250,245,0.75);
+  color: rgba(44,26,14,0.6);
   letter-spacing: 0.04em;
   transition: color 0.2s;
 }
 
-nav a:hover { color: var(--off-white); }
+nav a:hover { color: var(--brown); }
 nav a.active { color: var(--hot-pink) !important; }
 
 /* ============ HERO ============ */

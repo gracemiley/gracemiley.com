@@ -4,16 +4,23 @@
   if (!header) return;
   const isHero = document.querySelector('.hero');
   if (!isHero) {
+    // Non-hero pages: always solid dark-text header
     header.classList.add('solid');
     return;
   }
-  window.addEventListener('scroll', function() {
+  // Hero pages: start with dark (white text) header, switch on scroll
+  header.classList.add('dark-header');
+  function updateHeader() {
     if (window.scrollY > 60) {
       header.classList.add('solid');
+      header.classList.remove('dark-header');
     } else {
       header.classList.remove('solid');
+      header.classList.add('dark-header');
     }
-  });
+  }
+  window.addEventListener('scroll', updateHeader);
+  updateHeader();
 })();
 
 // hero switcher (home page only)

@@ -52,8 +52,9 @@ header * { pointer-events: all; }
 .logo {
   font-size: 14px;
   font-weight: 500;
-  color: var(--off-white);
+  color: var(--brown);
   letter-spacing: 0.02em;
+  transition: color 0.3s;
 }
 
 nav { display: flex; gap: 28px; }
@@ -61,12 +62,17 @@ nav { display: flex; gap: 28px; }
 nav a {
   font-size: 12px;
   font-weight: 400;
-  color: rgba(250,250,245,0.75);
+  color: rgba(44,26,14,0.6);
   letter-spacing: 0.04em;
   transition: color 0.2s;
 }
 
-nav a:hover { color: var(--off-white); }
+nav a:hover { color: var(--brown); }
+
+/* dark-header: white text over hero */
+header.dark-header .logo { color: var(--off-white); }
+header.dark-header nav a { color: rgba(250,250,245,0.75); }
+header.dark-header nav a:hover { color: var(--off-white); }
 
 /* ============ HERO ============ */
 .hero {
@@ -666,7 +672,7 @@ footer {
   <div style="font-size:9px;font-weight:500;letter-spacing:0.12em;color:var(--stone);margin-bottom:40px;">about</div>
   <div class="about-grid">
     <div>
-      <img class="about-photo" src="https://gracemiley.com/wp-content/uploads/2026/04/IMG_4227.JPG" alt="grace miley" loading="lazy" decoding="async">
+      <img class="about-photo" src="images/IMG_4265.webp" alt="grace miley" loading="lazy" decoding="async">
     </div>
     <div>
       <div style="font-size:9px;font-weight:500;letter-spacing:0.12em;color:var(--stone);margin-bottom:20px;">designer — salt lake city, ut</div>
@@ -679,7 +685,7 @@ footer {
       </div>
     </div>
   </div>
-  <div style="font-size:9px;font-weight:500;letter-spacing:0.12em;color:var(--stone);margin-bottom:24px;padding-top:60px;border-top:1px solid rgba(44,26,14,0.1);">disciplines + tools</div>
+  <div style="font-size:9px;font-weight:500;letter-spacing:0.12em;color:var(--stone);margin-bottom:24px;padding-top:32px;border-top:1px solid rgba(44,26,14,0.1);">disciplines + tools</div>
   <div class="about-skills-grid">
     <div class="about-skill-item"><div class="about-skill-name">graphic design</div><div class="about-skill-tools">adobe illustrator · indesign · photoshop · lightroom</div></div>
     <div class="about-skill-item"><div class="about-skill-name">branding + identity</div><div class="about-skill-tools">brand systems · creative direction · visual identity · print</div></div>
