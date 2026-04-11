@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>shaped by water — grace miley</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<header>
+  <a href="index.html" class="logo">grace miley</a>
+  <nav>
+    <a href="work.html" class="active">work</a>
+    <a href="https://griadesign.com/contact" target="_blank">services</a>
+    <a href="index.html#about">about</a>
+    <a href="contact.html">contact</a>
+  </nav>
+</header>
+
+<div class="project-gallery">
+<img class="gallery-main" src="https://gracemiley.com/wp-content/uploads/2026/04/SBWposterpromotion11102.jpg" alt="shaped by water" loading="eager">
+<div class="gallery-thumbs">
+  <img class="gallery-thumb" src="https://gracemiley.com/wp-content/uploads/2026/04/SBWpostcard1110.jpg" alt="salt flats poster" loading="lazy" decoding="async">
+  <img class="gallery-thumb" src="https://gracemiley.com/wp-content/uploads/2026/04/IMG_9915__1___2_.jpg" alt="hand-cast hexagon toys" loading="lazy" decoding="async">
+  <img class="gallery-thumb" src="https://gracemiley.com/wp-content/uploads/2026/04/SBWpamphlet.jpg" alt="trifold pamphlet" loading="lazy" decoding="async">
+</div>
+</div>
+
+<div class="project-intro">
+  <div>
+    <div class="project-title">shaped by water</div>
+    <p class="project-desc">a semester-long brand and merchandise system inspired by the history of the great salt lake. the project spans posters, pamphlets, hand-cast resin and crayon toys, and a full event campaign — drawing on the lake's geological and cultural history to create a visual system that is earthy, tactile, and deeply specific to place.</p>
+  </div>
+  <div class="project-meta">
+    <div class="project-meta-row">
+      <span class="project-meta-label">category</span>
+      <span class="project-meta-value">branding · print · exhibition · toy design · fabrication</span>
+    </div>
+    <div class="project-meta-row">
+      <span class="project-meta-label">studio</span>
+      <span class="project-meta-value" style="color: var(--hot-pink);">gria design studio</span>
+    </div>
+    <div class="project-meta-row">
+      <span class="project-meta-label">deliverables</span>
+      <span class="project-meta-value">posters · pamphlets · hand-cast toys · event campaign</span>
+    </div>
+  </div>
+</div>
+
+
+
+<div class="project-nav">
+  <a href="nrhh-swoop.html">← nrhh swoop chapter</a>
+  <span class="project-nav-center">05 / 09</span>
+  <a href="digital-threads.html">next project →</a>
+</div>
+
+<footer>
+  <span class="footer-logo">grace miley</span>
+  <div class="footer-links">
+    <a href="work.html">work</a>
+    <a href="https://griadesign.com/contact" target="_blank">services</a>
+    <a href="index.html#about">about</a>
+    <a href="contact.html">contact</a>
+    <a href="https://www.instagram.com/gracmiley/" target="_blank">instagram</a>
+    <a href="https://www.linkedin.com/in/grace-miley-101b8b298/" target="_blank">linkedin</a>
+  </div>
+  <span class="footer-copy">© 2026 grace miley</span>
+</footer>
+
+<script src="main.js"></script>
+
+<script>
+// Gallery functionality
+(function() {
+  var thumbs = document.querySelectorAll('.gallery-thumb');
+  var mainImg = document.querySelector('.gallery-main');
+  var lightbox = document.getElementById('galleryLightbox');
+  var lbImg = document.getElementById('lbImg');
+  var lbCaption = document.getElementById('lbCaption');
+  var curIdx = 0;
+  var images = [];
+
+  if (mainImg) images.push({ src: mainImg.getAttribute('data-full') || mainImg.src, alt: mainImg.alt });
+  thumbs.forEach(function(t) { images.push({ src: t.getAttribute('data-full') || t.src, alt: t.alt }); });
+
+  function setMain(idx) {
+    curIdx = idx;
+    if (mainImg && images[idx]) {
+      mainImg.src = images[idx].src;
+      mainImg.alt = images[idx].alt;
+    }
+    thumbs.forEach(function(t, i) { t.classList.toggle('active', i === idx - 1); });
+  }
+
+  thumbs.forEach(function(t, i) { t.addEventListener('click', function() { setMain(i + 1); }); });
+  if (mainImg) { mainImg.addEventListener('click', function() { openLb(curIdx); }); }
+  thumbs.forEach(function(t, i) { t.addEventListener('click', function() { openLb(i + 1); }); });
+
+  function openLb(idx) {
+    if (!lightbox) return;
+    curIdx = idx;
+    lbImg.src = images[idx].src;
+    lbImg.alt = images[idx].alt;
+    if (lbCaption) lbCaption.textContent = (idx + 1) + ' / ' + images.length;
+    lightbox.classList.add('open');
+    document.body.style.overflow = 'hidden';
+  }
+
+  window.closeLightbox = function() { lightbox && lightbox.classList.remove('open'); document.body.style.overflow = ''; };
+  window.lbPrev = function() { openLb((curIdx - 1 + images.length) % images.length); };
+  window.lbNext = function() { openLb((curIdx + 1) % images.length); };
+
+  if (lightbox) {
+    lightbox.addEventListener('click', function(e) { if (e.target === lightbox) closeLightbox(); });
+    document.addEventListener('keydown', function(e) {
+      if (!lightbox.classList.contains('open')) return;
+      if (e.key === 'Escape') closeLightbox();
+      if (e.key === 'ArrowLeft') lbPrev();
+      if (e.key === 'ArrowRight') lbNext();
+    });
+  }
+})();
+</script>
+
+<div class="gallery-lightbox" id="galleryLightbox">
+  <button class="gallery-lightbox-close" onclick="closeLightbox()">&#215;</button>
+  <button class="gallery-lightbox-prev" onclick="lbPrev()">&#8592;</button>
+  <img id="lbImg" src="" alt="">
+  <button class="gallery-lightbox-next" onclick="lbNext()">&#8594;</button>
+  <div class="gallery-caption" id="lbCaption"></div>
+</div>
+</body>
+</html>

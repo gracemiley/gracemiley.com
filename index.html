@@ -1,0 +1,786 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>grace miley — designer</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --pink:      #F9D0DC;
+  --blush:     #F4A0B8;
+  --hot-pink:  #E8175C;
+  --brown:     #2C1A0E;
+  --off-white: #FAFAF5;
+  --lime:      #C8DE6A;
+  --pale-lime: #E8EFA8;
+  --sky:       #7BBDD4;
+  --stone:     #9C9A92;
+}
+
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: 'DM Sans', sans-serif;
+  font-weight: 400;
+  background: var(--off-white);
+  color: var(--brown);
+  text-transform: lowercase;
+  -webkit-font-smoothing: antialiased;
+}
+
+a { text-decoration: none; color: inherit; }
+
+/* ============ HEADER ============ */
+header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: calc(100% - 60px);
+  z-index: 100;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 20px 28px;
+  pointer-events: none;
+}
+
+header * { pointer-events: all; }
+
+.logo {
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--off-white);
+  letter-spacing: 0.02em;
+}
+
+nav { display: flex; gap: 28px; }
+
+nav a {
+  font-size: 12px;
+  font-weight: 400;
+  color: rgba(250,250,245,0.75);
+  letter-spacing: 0.04em;
+  transition: color 0.2s;
+}
+
+nav a:hover { color: var(--off-white); }
+
+/* ============ HERO ============ */
+.hero {
+  display: flex;
+  height: 100vh;
+  min-height: 600px;
+  overflow: hidden;
+}
+
+.hero-main {
+  position: relative;
+  flex: 1;
+  overflow: hidden;
+  background: var(--brown);
+}
+
+.hero-bg {
+  position: absolute;
+  inset: 0;
+  background-size: cover;
+  background-position: center center;
+  background-repeat: no-repeat;
+  transition: opacity 0.5s ease;
+}
+
+.hero-text {
+  position: absolute;
+  bottom: 36px;
+  left: 36px;
+  right: 36px;
+  z-index: 10;
+}
+
+.hero-label {
+  display: inline-block;
+  font-size: 9px;
+  font-weight: 400;
+  color: var(--brown);
+  letter-spacing: 0.14em;
+  background: var(--pale-lime);
+  padding: 3px 8px;
+  margin-bottom: 8px;
+}
+
+.hero-title {
+  display: inline;
+  font-size: 40px;
+  font-weight: 500;
+  color: var(--brown);
+  line-height: 1.15;
+  letter-spacing: -0.01em;
+  background: var(--pale-lime);
+  padding: 2px 10px;
+  box-decoration-break: clone;
+  -webkit-box-decoration-break: clone;
+}
+
+.hero-title-wrap {
+  display: block;
+  margin-bottom: 8px;
+}
+
+.hero-desc {
+  display: inline;
+  font-size: 11px;
+  font-weight: 300;
+  color: var(--brown);
+  line-height: 1.8;
+  background: var(--pale-lime);
+  padding: 2px 8px;
+  box-decoration-break: clone;
+  -webkit-box-decoration-break: clone;
+}
+
+.hero-desc-wrap {
+  display: block;
+  max-width: 360px;
+  margin-bottom: 18px;
+}
+
+.hero-btn {
+  display: inline-block;
+  font-size: 11px;
+  font-weight: 400;
+  color: var(--brown);
+  background: var(--pale-lime);
+  padding: 8px 18px;
+  letter-spacing: 0.06em;
+  transition: background 0.2s;
+}
+
+.hero-btn:hover { background: var(--lime); }
+
+.hero-dots {
+  position: absolute;
+  bottom: 22px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  gap: 8px;
+  z-index: 10;
+}
+
+.hero-dot {
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: rgba(250,250,245,0.3);
+  cursor: pointer;
+  border: none;
+  padding: 0;
+  transition: background 0.3s;
+}
+
+.hero-dot.active { background: var(--pink); }
+
+.hero-scroll {
+  position: absolute;
+  bottom: 22px;
+  right: 20px;
+  font-size: 10px;
+  font-weight: 300;
+  color: rgba(250,250,245,0.3);
+  letter-spacing: 0.06em;
+  z-index: 10;
+}
+
+/* ============ SIDEBAR ============ */
+.hero-sidebar {
+  width: 60px;
+  min-width: 60px;
+  background: var(--brown);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 80px 0 20px;
+  position: relative;
+  z-index: 20;
+}
+
+.side-item {
+  width: 100%;
+  height: 36px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  position: relative;
+  border-left: 2px solid transparent;
+  transition: border-color 0.25s;
+}
+
+.side-item.active { border-left-color: var(--pink); }
+
+.side-dot {
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: rgba(250,250,245,0.25);
+  transition: background 0.25s;
+}
+
+.side-item.active .side-dot { background: var(--pink); }
+
+.side-tooltip {
+  position: absolute;
+  right: 64px;
+  background: var(--brown);
+  color: var(--off-white);
+  font-size: 10px;
+  font-weight: 400;
+  white-space: nowrap;
+  padding: 5px 12px;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.2s;
+  border-left: 2px solid var(--hot-pink);
+  z-index: 30;
+}
+
+.side-item:hover .side-tooltip { opacity: 1; }
+
+.side-num {
+  position: absolute;
+  bottom: 20px;
+  font-size: 9px;
+  color: rgba(250,250,245,0.2);
+  font-weight: 300;
+  writing-mode: vertical-lr;
+  letter-spacing: 0.1em;
+}
+
+/* ============ PROJECT GRID ============ */
+.projects {
+  padding: 80px 40px;
+  background: var(--off-white);
+}
+
+.projects-header {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  margin-bottom: 40px;
+}
+
+.projects-header h2 {
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.12em;
+  color: var(--stone);
+}
+
+.projects-header a {
+  font-size: 11px;
+  font-weight: 400;
+  color: var(--hot-pink);
+  letter-spacing: 0.04em;
+  transition: opacity 0.2s;
+}
+
+.projects-header a:hover { opacity: 0.7; }
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 2px;
+}
+
+.grid-item {
+  position: relative;
+  aspect-ratio: 4/3;
+  overflow: hidden;
+  cursor: pointer;
+  background: var(--brown);
+}
+
+.grid-item img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  transition: transform 0.5s ease, opacity 0.3s ease;
+}
+
+.grid-item:hover img {
+  transform: scale(1.04);
+  opacity: 0.7;
+}
+
+.grid-item-info {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  padding: 20px;
+  opacity: 0;
+  transition: opacity 0.3s;
+  z-index: 10;
+}
+
+.grid-item:hover .grid-item-info { opacity: 1; }
+
+.grid-item-title {
+  display: inline;
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--brown);
+  background: var(--pale-lime);
+  padding: 2px 6px;
+  box-decoration-break: clone;
+  -webkit-box-decoration-break: clone;
+  line-height: 1.6;
+}
+
+.grid-item-label {
+  display: block;
+  margin-top: 6px;
+}
+
+.grid-item-cat {
+  display: inline;
+  font-size: 9px;
+  font-weight: 400;
+  color: var(--brown);
+  background: var(--pale-lime);
+  padding: 2px 6px;
+  letter-spacing: 0.08em;
+  box-decoration-break: clone;
+  -webkit-box-decoration-break: clone;
+}
+
+.gria-pill {
+  display: inline-block;
+  font-size: 9px;
+  font-weight: 500;
+  color: var(--off-white);
+  background: var(--hot-pink);
+  padding: 3px 9px;
+  letter-spacing: 0.08em;
+  position: absolute;
+  top: 14px;
+  left: 14px;
+  z-index: 10;
+}
+
+/* ============ ABOUT BLURB ============ */
+.about-blurb {
+  padding: 80px 40px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 80px;
+  align-items: center;
+  border-top: 1px solid rgba(44,26,14,0.1);
+}
+
+.about-blurb-label {
+  font-size: 9px;
+  font-weight: 500;
+  letter-spacing: 0.12em;
+  color: var(--stone);
+  margin-bottom: 20px;
+}
+
+.about-blurb p {
+  font-size: 15px;
+  font-weight: 300;
+  line-height: 1.8;
+  color: var(--brown);
+  margin-bottom: 24px;
+}
+
+.about-blurb a {
+  font-size: 12px;
+  font-weight: 500;
+  color: var(--hot-pink);
+  letter-spacing: 0.04em;
+  border-bottom: 1px solid var(--hot-pink);
+  padding-bottom: 2px;
+  transition: opacity 0.2s;
+}
+
+.about-blurb a:hover { opacity: 0.7; }
+
+.about-blurb-right {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.skill-tag {
+  display: inline-block;
+  font-size: 10px;
+  font-weight: 400;
+  color: var(--brown);
+  background: var(--pink);
+  padding: 6px 12px;
+  margin: 2px;
+  letter-spacing: 0.04em;
+}
+
+/* ============ SKILLS STRIP ============ */
+.skills-strip {
+  background: var(--brown);
+  padding: 24px 40px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  align-items: center;
+  border-top: 1px solid rgba(44,26,14,0.1);
+}
+
+.skills-strip-label {
+  font-size: 9px;
+  font-weight: 500;
+  letter-spacing: 0.12em;
+  color: rgba(250,250,245,0.4);
+  margin-right: 8px;
+}
+
+.skills-strip span {
+  font-size: 10px;
+  font-weight: 300;
+  color: rgba(250,250,245,0.6);
+  letter-spacing: 0.04em;
+}
+
+.skills-strip span::after {
+  content: '·';
+  margin-left: 12px;
+  color: rgba(250,250,245,0.2);
+}
+
+.skills-strip span:last-child::after { content: ''; }
+
+/* ============ FOOTER ============ */
+footer {
+  background: var(--brown);
+  padding: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-top: 1px solid rgba(250,250,245,0.08);
+}
+
+.footer-logo {
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--off-white);
+}
+
+.footer-links {
+  display: flex;
+  gap: 24px;
+}
+
+.footer-links a {
+  font-size: 11px;
+  font-weight: 400;
+  color: rgba(250,250,245,0.5);
+  letter-spacing: 0.04em;
+  transition: color 0.2s;
+}
+
+.footer-links a:hover { color: var(--off-white); }
+
+.footer-copy {
+  font-size: 10px;
+  font-weight: 300;
+  color: rgba(250,250,245,0.25);
+  letter-spacing: 0.04em;
+}
+
+/* gria pill tooltip */
+.gria-pill-wrap {
+  position: absolute;
+  top: 14px;
+  left: 14px;
+  z-index: 10;
+}
+.gria-pill-wrap .gria-pill {
+  position: static;
+  display: inline-block;
+}
+.gria-callout {
+  position: absolute;
+  top: calc(100% + 6px);
+  left: 0;
+  background: var(--brown);
+  color: var(--off-white);
+  font-size: 10px;
+  font-weight: 300;
+  line-height: 1.6;
+  padding: 10px 14px;
+  width: 200px;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.2s;
+  border-left: 2px solid var(--hot-pink);
+  z-index: 20;
+  text-transform: lowercase;
+}
+.gria-pill-wrap:hover .gria-callout { opacity: 1; }
+.hero-bg { transition: opacity 0.7s ease; }
+.hero-bg.fade-out { opacity: 0; }
+
+/* about section */
+#about { padding: 80px 40px; border-top: 1px solid rgba(44,26,14,0.1); }
+.about-photo { width: 100%; aspect-ratio: 3/4; object-fit: cover; display: block; }
+.about-skills-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 2px; }
+.about-skill-item { background: var(--pink); padding: 20px; }
+.about-skill-name { font-size: 13px; font-weight: 500; color: var(--brown); margin-bottom: 6px; }
+.about-skill-tools { font-size: 10px; font-weight: 300; color: rgba(44,26,14,0.6); line-height: 1.6; }
+.about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: start; margin-bottom: 60px; }
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<header>
+  <a href="index.html" class="logo">grace miley</a>
+  <nav>
+    <a href="work.html">work</a>
+    <a href="https://griadesign.com/contact" target="_blank">services</a>
+    <a href="index.html#about">about</a>
+    <a href="contact.html">contact</a>
+  </nav>
+</header>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-main">
+    <div class="hero-bg" id="heroBg"></div>
+    <div class="hero-text">
+      <div><span class="hero-label" id="heroLabel"></span></div>
+      <div class="hero-title-wrap"><span class="hero-title" id="heroTitle"></span></div>
+      <div class="hero-desc-wrap"><span class="hero-desc" id="heroDesc"></span></div>
+      <a class="hero-btn" id="heroBtn" href="#">view project →</a>
+    </div>
+    <div class="hero-dots" id="heroDots"></div>
+    <div class="hero-scroll">scroll ↓</div>
+  </div>
+  <div class="hero-sidebar" id="heroSidebar">
+    <span class="side-num" id="sideNum">01 / 09</span>
+  </div>
+</section>
+
+<!-- PROJECT GRID -->
+<section class="projects" id="work">
+  <div class="projects-header">
+    <h2>selected work</h2>
+    <a href="work.html">view all →</a>
+  </div>
+  <div class="grid">
+
+    <a href="ant-farm-office.html" class="grid-item">
+      <div class="gria-pill-wrap"><span class="gria-pill">gria studio</span><div class="gria-callout">gria design studio — a multi-disciplinary creative studio co-founded with mia bookstaber, working across branding, product design, and creative direction.</div></div>
+      <img src="https://gracemiley.com/wp-content/uploads/2026/04/bagpic1.png" alt="ant farm office" loading="lazy" decoding="async">
+      <div class="grid-item-info">
+        <span class="grid-item-title">ant farm office</span>
+        <div class="grid-item-label"><span class="grid-item-cat">wearables · branding · soft goods</span></div>
+      </div>
+    </a>
+
+    <a href="gria-studio.html" class="grid-item">
+      <img src="https://gracemiley.com/wp-content/uploads/2026/04/Artboard_15gs2__1_.png" alt="gria studio" loading="lazy" decoding="async">
+      <div class="grid-item-info">
+        <span class="grid-item-title">gria studio</span>
+        <div class="grid-item-label"><span class="grid-item-cat">branding · identity · creative direction</span></div>
+      </div>
+    </a>
+
+    <a href="gjso-soundscapes.html" class="grid-item">
+      <img src="https://gracemiley.com/wp-content/uploads/2026/04/Mockup__2_.jpg" alt="gjso soundscapes" loading="lazy" decoding="async">
+      <div class="grid-item-info">
+        <span class="grid-item-title">gjso soundscapes</span>
+        <div class="grid-item-label"><span class="grid-item-cat">branding · print · identity system</span></div>
+      </div>
+    </a>
+
+    <a href="nrhh-swoop.html" class="grid-item">
+      <img src="https://gracemiley.com/wp-content/uploads/2026/04/phonebig.jpg" alt="nrhh swoop chapter" loading="lazy" decoding="async">
+      <div class="grid-item-info">
+        <span class="grid-item-title">nrhh swoop chapter</span>
+        <div class="grid-item-label"><span class="grid-item-cat">branding · social media · merch</span></div>
+      </div>
+    </a>
+
+    <a href="shaped-by-water.html" class="grid-item">
+      <div class="gria-pill-wrap"><span class="gria-pill">gria studio</span><div class="gria-callout">gria design studio — a multi-disciplinary creative studio co-founded with mia bookstaber, working across branding, product design, and creative direction.</div></div>
+      <img src="https://gracemiley.com/wp-content/uploads/2026/04/SBWposterpromotion11102.jpg" alt="shaped by water" loading="lazy" decoding="async">
+      <div class="grid-item-info">
+        <span class="grid-item-title">shaped by water</span>
+        <div class="grid-item-label"><span class="grid-item-cat">branding · print · exhibition</span></div>
+      </div>
+    </a>
+
+    <a href="digital-threads.html" class="grid-item">
+      <img src="https://gracemiley.com/wp-content/uploads/2026/04/Digitalthreadsmockup.jpg" alt="digital threads" loading="lazy" decoding="async">
+      <div class="grid-item-info">
+        <span class="grid-item-title">digital threads</span>
+        <div class="grid-item-label"><span class="grid-item-cat">editorial · publication · ux</span></div>
+      </div>
+    </a>
+
+    <a href="object-and-play.html" class="grid-item">
+      <div class="gria-pill-wrap"><span class="gria-pill">gria studio</span><div class="gria-callout">gria design studio — a multi-disciplinary creative studio co-founded with mia bookstaber, working across branding, product design, and creative direction.</div></div>
+      <img src="https://gracemiley.com/wp-content/uploads/2026/04/Screenshot_2026-01-23_at_12_55_59_PM__1_.png" alt="object + play" loading="lazy" decoding="async">
+      <div class="grid-item-info">
+        <span class="grid-item-title">object + play</span>
+        <div class="grid-item-label"><span class="grid-item-cat">event design · print · illustration</span></div>
+      </div>
+    </a>
+
+    <a href="missing-piece-fleur.html" class="grid-item">
+      <div class="gria-pill-wrap"><span class="gria-pill">gria studio</span><div class="gria-callout">gria design studio — a multi-disciplinary creative studio co-founded with mia bookstaber, working across branding, product design, and creative direction.</div></div>
+      <img src="https://gracemiley.com/wp-content/uploads/2026/04/FinalImage__2_.png" alt="missing piece / fleur" loading="lazy" decoding="async">
+      <div class="grid-item-info">
+        <span class="grid-item-title">missing piece / fleur</span>
+        <div class="grid-item-label"><span class="grid-item-cat">product design · packaging · 3d</span></div>
+      </div>
+    </a>
+
+    <a href="barriers.html" class="grid-item">
+      <div class="gria-pill-wrap"><span class="gria-pill">gria studio</span><div class="gria-callout">gria design studio — a multi-disciplinary creative studio co-founded with mia bookstaber, working across branding, product design, and creative direction.</div></div>
+      <img src="https://gracemiley.com/wp-content/uploads/2026/04/0BF9B406-0839-49D8-AE76-B746DA3AA7C1__1_.jpeg" alt="barriers" loading="lazy" decoding="async">
+      <div class="grid-item-info">
+        <span class="grid-item-title">barriers</span>
+        <div class="grid-item-label"><span class="grid-item-cat">game design · 3d · installation</span></div>
+      </div>
+    </a>
+
+  </div>
+</section>
+
+<!-- ABOUT SECTION (merged) -->
+<section id="about">
+  <div style="font-size:9px;font-weight:500;letter-spacing:0.12em;color:var(--stone);margin-bottom:40px;">about</div>
+  <div class="about-grid">
+    <div>
+      <img class="about-photo" src="https://gracemiley.com/wp-content/uploads/2026/04/IMG_4227.JPG" alt="grace miley" loading="lazy" decoding="async">
+    </div>
+    <div>
+      <div style="font-size:9px;font-weight:500;letter-spacing:0.12em;color:var(--stone);margin-bottom:20px;">designer — salt lake city, ut</div>
+      <p style="font-size:15px;font-weight:300;line-height:1.8;color:var(--brown);margin-bottom:20px;">as a designer, i strive for a high level of sophistication and playfulness. every single part of the design process is carefully considered. i pride myself on conceptual, graphic, and technical skills — specifically through drawings, fabrication, and prototyping.</p>
+      <p style="font-size:15px;font-weight:300;line-height:1.8;color:var(--brown);margin-bottom:20px;">i have ample experience in branding, soft goods, and design research. i am a two-time winner of the design studio award in mdd; and been recognized by graphic and fashion designers in the industry.</p>
+      <p style="font-size:15px;font-weight:300;line-height:1.8;color:var(--brown);margin-bottom:20px;">i co-founded <a href="https://griadesign.com" target="_blank" style="color:var(--hot-pink);border-bottom:1px solid var(--hot-pink);padding-bottom:1px;">gria design studio</a> with mia bookstaber — a multi-disciplinary creative studio working across branding, product design, and creative direction.</p>
+      <div style="display:flex;gap:16px;flex-wrap:wrap;margin-top:32px;">
+        <a href="https://acrobat.adobe.com/id/urn:aaid:sc:VA6C2:9bf6c042-8911-4046-bd3e-3b5dea0f5db9" target="_blank" style="display:inline-block;font-size:11px;font-weight:500;color:var(--off-white);background:var(--brown);padding:10px 20px;letter-spacing:0.06em;">view pdf portfolio &#8594;</a>
+        <a href="https://acrobat.adobe.com/id/urn:aaid:sc:VA6C2:6def1a4b-8da2-452e-9ae8-4a26dd7faac8" target="_blank" style="display:inline-block;font-size:11px;font-weight:500;color:var(--brown);border:1px solid rgba(44,26,14,0.3);padding:10px 20px;letter-spacing:0.06em;">download resume &#8594;</a>
+      </div>
+    </div>
+  </div>
+  <div style="font-size:9px;font-weight:500;letter-spacing:0.12em;color:var(--stone);margin-bottom:24px;padding-top:60px;border-top:1px solid rgba(44,26,14,0.1);">disciplines + tools</div>
+  <div class="about-skills-grid">
+    <div class="about-skill-item"><div class="about-skill-name">graphic design</div><div class="about-skill-tools">adobe illustrator · indesign · photoshop · lightroom</div></div>
+    <div class="about-skill-item"><div class="about-skill-name">branding + identity</div><div class="about-skill-tools">brand systems · creative direction · visual identity · print</div></div>
+    <div class="about-skill-item"><div class="about-skill-name">soft goods + wearables</div><div class="about-skill-tools">pattern making · fabrication · prototyping · tech packs</div></div>
+    <div class="about-skill-item"><div class="about-skill-name">3d modeling</div><div class="about-skill-tools">rhino · unity · game design · character design</div></div>
+    <div class="about-skill-item"><div class="about-skill-name">web design</div><div class="about-skill-tools">wordpress · elementor pro · html · css</div></div>
+    <div class="about-skill-item"><div class="about-skill-name">film + video</div><div class="about-skill-tools">adobe premiere pro · editing · production</div></div>
+  </div>
+</section>
+
+<!-- SKILLS STRIP -->
+<div class="skills-strip">
+  <span class="skills-strip-label">tools</span>
+  <span>adobe illustrator</span>
+  <span>indesign</span>
+  <span>photoshop</span>
+  <span>lightroom</span>
+  <span>premiere pro</span>
+  <span>rhino</span>
+  <span>unity</span>
+  <span>wordpress</span>
+  <span>elementor pro</span>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <span class="footer-logo">grace miley</span>
+  <div class="footer-links">
+    <a href="work.html">work</a>
+    <a href="https://griadesign.com/contact" target="_blank">services</a>
+    <a href="index.html#about">about</a>
+    <a href="contact.html">contact</a>
+    <a href="https://www.instagram.com/gracmiley/" target="_blank">instagram</a>
+    <a href="https://www.linkedin.com/in/grace-miley-101b8b298/" target="_blank">linkedin</a>
+  </div>
+  <span class="footer-copy">© 2026 grace miley</span>
+</footer>
+
+<script>
+const projects = [
+  { num:'01', title:'ant farm office', label:'wearables · branding · soft goods', desc:'a wearable brand exploring personal intuition vs. corporate hive mindset. the go with your gut bag — designed and sewn by grace.', image:'https://gracemiley.com/wp-content/uploads/2026/04/bagpic1.png', link:'ant-farm-office.html' },
+  { num:'02', title:'gria studio', label:'branding · identity · creative direction · product design', desc:'a multi-disciplinary design studio co-founded with mia bookstaber — branding, creative direction, and product design.', image:'https://gracemiley.com/wp-content/uploads/2026/04/Artboard_15gs2__1_.png', link:'gria-studio.html' },
+  { num:'03', title:'gjso soundscapes', label:'branding · graphic design · print · identity system', desc:'a full season identity system for the grand junction symphony orchestra\'s 47th season — posters, banners, brochures, and merch across 8 concerts.', image:'https://gracemiley.com/wp-content/uploads/2026/04/Mockup__2_.jpg', link:'gjso-soundscapes.html' },
+  { num:'04', title:'nrhh swoop chapter', label:'branding · identity · social media · merch · illustration', desc:'creative director for the university of utah\'s nrhh chapter — logo, merch, event graphics, and a full social media campaign.', image:'https://gracemiley.com/wp-content/uploads/2026/04/phonebig.jpg', link:'nrhh-swoop.html' },
+  { num:'05', title:'shaped by water', label:'branding · print · exhibition · toy design · fabrication', desc:'a semester-long brand and merchandise system inspired by the history of the great salt lake — posters, pamphlets, hand-cast resin and crayon toys.', image:'https://gracemiley.com/wp-content/uploads/2026/04/SBWposterpromotion11102.jpg', link:'shaped-by-water.html' },
+  { num:'06', title:'digital threads', label:'editorial design · publication · ux · social impact', desc:'an interactive digital zine helping newcomers navigate resettlement resources and digital literacy — presented at the irc\'s tech confluence in new york city.', image:'https://gracemiley.com/wp-content/uploads/2026/04/Digitalthreadsmockup.jpg', link:'digital-threads.html' },
+  { num:'07', title:'object + play', label:'event design · print · editorial · illustration · branding', desc:'logo, zine, poster, price list, and social campaign for a gala showcasing nine artists at the gala in salt lake city.', image:'https://gracemiley.com/wp-content/uploads/2026/04/Screenshot_2026-01-23_at_12_55_59_PM__1_.png', link:'object-and-play.html' },
+  { num:'08', title:'missing piece / fleur', label:'product design · branding · packaging · 3d · design research', desc:'a full product redesign of phlur\'s viral fragrance — repositioned from grief to ambition. new packaging, identity, bottle design, and tech packs.', image:'https://gracemiley.com/wp-content/uploads/2026/04/FinalImage__2_.png', link:'missing-piece-fleur.html' },
+  { num:'09', title:'barriers', label:'game design · 3d · installation · character design · print · interactive', desc:'a site-specific video game projected onto real cave walls in millcreek canyon — with hand-built arduino controller, low-poly characters, and an original narrative.', image:'https://gracemiley.com/wp-content/uploads/2026/04/0BF9B406-0839-49D8-AE76-B746DA3AA7C1__1_.jpeg', link:'barriers.html' }
+];
+
+let current = 0;
+const bg = document.getElementById('heroBg');
+const label = document.getElementById('heroLabel');
+const title = document.getElementById('heroTitle');
+const desc = document.getElementById('heroDesc');
+const btn = document.getElementById('heroBtn');
+const dots = document.getElementById('heroDots');
+const sidebar = document.getElementById('heroSidebar');
+const sideNum = document.getElementById('sideNum');
+
+let autoTimer = null;
+
+function update(idx, fromAuto) {
+  current = idx;
+  const p = projects[idx];
+  bg.classList.add('fade-out');
+  setTimeout(function() {
+    bg.style.backgroundImage = 'url(' + p.image + ')';
+    bg.classList.remove('fade-out');
+  }, 350);
+  label.textContent = p.label;
+  title.textContent = p.title;
+  desc.textContent = p.desc;
+  btn.href = p.link;
+  sideNum.textContent = p.num + ' / 09';
+  document.querySelectorAll('.hero-dot').forEach(function(d,i) { d.classList.toggle('active', i===idx); });
+  document.querySelectorAll('.side-item').forEach(function(s,i) { s.classList.toggle('active', i===idx); });
+  if (!fromAuto) resetAutoTimer();
+}
+
+function resetAutoTimer() {
+  if (autoTimer) clearInterval(autoTimer);
+  autoTimer = setInterval(function() { update((current + 1) % projects.length, true); }, 6000);
+}
+
+projects.forEach(function(p, i) {
+  const dot = document.createElement('button');
+  dot.className = 'hero-dot' + (i===0 ? ' active' : '');
+  dot.onclick = function() { update(i); };
+  dots.appendChild(dot);
+
+  const item = document.createElement('div');
+  item.className = 'side-item' + (i===0 ? ' active' : '');
+  item.innerHTML = '<div class="side-dot"></div><div class="side-tooltip">' + p.num + ' — ' + p.title + '</div>';
+  item.onclick = function() { update(i); };
+  sidebar.insertBefore(item, sideNum);
+});
+
+update(0, true);
+resetAutoTimer();
+</script>
+</body>
+</html>
