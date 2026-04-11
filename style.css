@@ -937,6 +937,13 @@ footer {
 
 .gallery-main-wrap {
   position: relative;
+  display: block;
+  width: 100%;
+}
+
+.gallery-main-wrap .gallery-main {
+  display: block;
+  width: 100%;
 }
 
 .gallery-zoom-hint {
@@ -1063,4 +1070,23 @@ footer {
   color: rgba(250,250,245,0.5);
   letter-spacing: 0.08em;
   white-space: nowrap;
+}
+
+/* Gria studio image padding in grid */
+.grid-item.contains-logo img {
+  object-fit: contain;
+  padding: 20px;
+  background: var(--off-white);
+}
+
+.grid-item.gria-logo-item img {
+  object-fit: contain !important;
+  padding: 32px;
+}
+
+/* gria studio hero in project page */
+.gallery-main.gria-contain {
+  object-fit: contain;
+  background: var(--off-white);
+  padding: 40px;
 }
