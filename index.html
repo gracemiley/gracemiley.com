@@ -740,12 +740,12 @@ const projects = [
 
 let current = 0;
 const bg = document.getElementById('heroBg');
-const label = document.getElementById('heroLabel');
-const title = document.getElementById('heroTitle');
-const desc = document.getElementById('heroDesc');
-const btn = document.getElementById('heroBtn');
-const dots = document.getElementById('heroDots');
-const sidebar = document.getElementById('heroSidebar');
+const heroLabelEl = document.getElementById('heroLabel');
+const heroTitleEl = document.getElementById('heroTitle');
+const heroDescEl = document.getElementById('heroDesc');
+const heroBtnEl = document.getElementById('heroBtn');
+const heroDotsEl = document.getElementById('heroDots');
+const heroSidebarEl = document.getElementById('heroSidebar');
 const sideNum = document.getElementById('sideNum');
 
 let autoTimer = null;
@@ -758,10 +758,10 @@ function update(idx, fromAuto) {
     bg.style.backgroundImage = 'url(' + p.image + ')';
     bg.classList.remove('fade-out');
   }, 350);
-  label.textContent = p.label;
-  title.textContent = p.title;
-  desc.textContent = p.desc;
-  btn.href = p.link;
+  heroLabelEl.textContent = p.label;
+  heroTitleEl.textContent = p.title;
+  heroDescEl.textContent = p.desc;
+  heroBtnEl.href = p.link;
   sideNum.textContent = p.num + ' / 10';
   document.querySelectorAll('.hero-dot').forEach(function(d,i) { d.classList.toggle('active', i===idx); });
   document.querySelectorAll('.side-item').forEach(function(s,i) { s.classList.toggle('active', i===idx); });
@@ -777,13 +777,13 @@ projects.forEach(function(p, i) {
   const dot = document.createElement('button');
   dot.className = 'hero-dot' + (i===0 ? ' active' : '');
   dot.onclick = function() { update(i); };
-  dots.appendChild(dot);
+  heroDotsEl.appendChild(dot);
 
   const item = document.createElement('div');
   item.className = 'side-item' + (i===0 ? ' active' : '');
   item.innerHTML = '<div class="side-dot"></div><div class="side-tooltip">' + p.num + ' — ' + p.title + '</div>';
   item.onclick = function() { update(i); };
-  sidebar.insertBefore(item, sideNum);
+  heroSidebarEl.insertBefore(item, sideNum);
 });
 
 // Preload all hero images for instant switching
