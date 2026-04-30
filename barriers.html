@@ -21,14 +21,21 @@
 </header>
 
 <div class="project-gallery">
-<div class="gallery-main-wrap"><img class="gallery-main" src="/images/0BF9B406-0839-49D8-AE76-B746DA3AA7C1 (1).webp" alt="barriers" loading="eager"><div class="gallery-zoom-hint">click to expand</div></div>
+<div class="gallery-main-wrap">
+<img class="gallery-main" src="/images/0BF9B406-0839-49D8-AE76-B746DA3AA7C1 (1).webp" alt="barriers" loading="eager">
+<div class="gallery-zoom-hint">click to expand</div>
+</div>
 <div class="gallery-thumbs">
-  <img class="gallery-thumb" src="/images/E83E8681-0065-48D4-8BA6-F7375910C954.webp" alt="cave projection" loading="lazy" decoding="async">
-  <img class="gallery-thumb" src="/images/Artboard 8barrierslogo (1).webp" alt="barriers logo" loading="lazy" decoding="async">
-  <img class="gallery-thumb" src="/images/ebajournal (2).webp" alt="eba field journal" loading="lazy" decoding="async">
-  <img class="gallery-thumb" src="/images/SGFBrochure_02.webp" alt="barriers exploration pamphlet" loading="lazy" decoding="async">
-  <img class="gallery-thumb" src="/images/1CC1EC7F-98ED-438A-B893-A17D8F49AE9B.webp" alt="barriers process book" loading="lazy" decoding="async">
-  <img class="gallery-thumb" src="/images/SGFBrochure_09.webp" alt="bialy gallery trifold" loading="lazy" decoding="async">
+  <img class="gallery-thumb" src="/images/barriers1.webp" alt="barriers 1" loading="lazy" decoding="async">
+  <img class="gallery-thumb" src="/images/barriers2.webp" alt="barriers 2" loading="lazy" decoding="async">
+  <img class="gallery-thumb" src="/images/barriers3.webp" alt="barriers 3" loading="lazy" decoding="async">
+  <img class="gallery-thumb" src="/images/barriers4.webp" alt="barriers 4" loading="lazy" decoding="async">
+  <img class="gallery-thumb" src="/images/barriers5.webp" alt="barriers 5" loading="lazy" decoding="async">
+  <img class="gallery-thumb" src="/images/barriers6.webp" alt="barriers 6" loading="lazy" decoding="async">
+  <img class="gallery-thumb" src="/images/ebajournal (2).webp" alt="eba journal" loading="lazy" decoding="async">
+  <img class="gallery-thumb" src="/images/SGFBrochure_02.webp" alt="pamphlet" loading="lazy" decoding="async">
+  <img class="gallery-thumb" src="/images/1CC1EC7F-98ED-438A-B893-A17D8F49AE9B.jpeg" alt="process book" loading="lazy" decoding="async">
+  <img class="gallery-thumb" src="/images/SGFBrochure_09.webp" alt="trifold" loading="lazy" decoding="async">
 </div>
 </div>
 
@@ -56,10 +63,10 @@
 
 
 
-<div class="project-nav">
+<div class="project-nav project-nav-sticky">
   <a href="missing-piece-fleur.html">← missing piece / fleur</a>
-  <span class="project-nav-center">09 / 10</span>
-  <a href="work.html">all work →</a>
+  <span class="project-nav-center">09 / 11</span>
+  <a href="nrhh-swoop.html">next project →</a>
 </div>
 
 <footer>
@@ -88,11 +95,9 @@
   var lbCap   = document.getElementById('lbCaption');
   var lbMax   = document.getElementById('lbMaxBtn');
 
-  // Build image list: hero first, then thumbs
   if (mainImg) allImgs.push({ src: mainImg.src, alt: mainImg.alt });
   thumbs.forEach(function(t) { allImgs.push({ src: t.src, alt: t.alt }); });
 
-  // Click thumb: update main image
   thumbs.forEach(function(t, i) {
     t.style.cursor = 'pointer';
     t.addEventListener('click', function() {
@@ -103,7 +108,6 @@
     });
   });
 
-  // Click main image: open lightbox
   if (mainImg) {
     mainImg.style.cursor = 'zoom-in';
     mainImg.addEventListener('click', function() { openLb(curIdx); });
@@ -126,38 +130,23 @@
     lb.classList.remove('open', 'maximized');
     document.body.style.overflow = '';
   };
-
-  window.lbPrev = function() {
-    if (allImgs.length === 0) return;
-    openLb((curIdx - 1 + allImgs.length) % allImgs.length);
-  };
-
-  window.lbNext = function() {
-    if (allImgs.length === 0) return;
-    openLb((curIdx + 1) % allImgs.length);
-  };
-
+  window.lbPrev = function() { if (allImgs.length) openLb((curIdx - 1 + allImgs.length) % allImgs.length); };
+  window.lbNext = function() { if (allImgs.length) openLb((curIdx + 1) % allImgs.length); };
   window.lbMaximize = function() {
     if (!lb) return;
     lb.classList.toggle('maximized');
     if (lbMax) lbMax.textContent = lb.classList.contains('maximized') ? '\u229f restore' : '\u229e maximize';
   };
 
-  // Keyboard nav
   document.addEventListener('keydown', function(e) {
     if (!lb || !lb.classList.contains('open')) return;
-    if (e.key === 'Escape')      window.closeLightbox();
-    if (e.key === 'ArrowLeft')   window.lbPrev();
-    if (e.key === 'ArrowRight')  window.lbNext();
+    if (e.key === 'Escape')     window.closeLightbox();
+    if (e.key === 'ArrowLeft')  window.lbPrev();
+    if (e.key === 'ArrowRight') window.lbNext();
     if (e.key === 'f' || e.key === 'F') window.lbMaximize();
   });
 
-  // Close on backdrop click
-  if (lb) {
-    lb.addEventListener('click', function(e) {
-      if (e.target === lb) window.closeLightbox();
-    });
-  }
+  if (lb) lb.addEventListener('click', function(e) { if (e.target === lb) window.closeLightbox(); });
 })();
 </script>
 

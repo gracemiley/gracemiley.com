@@ -21,13 +21,19 @@
 </header>
 
 <div class="project-gallery">
-<div class="gallery-main-wrap"><img class="gallery-main" src="/images/Objectandplayhero.webp" alt="object + play" loading="eager"><div class="gallery-zoom-hint">click to expand</div></div>
+<div class="gallery-main-wrap">
+<img class="gallery-main" src="/images/Objectandplayhero.webp" alt="object + play" loading="eager">
+<div class="gallery-zoom-hint">click to expand</div>
+</div>
 <div class="gallery-thumbs">
-  <img class="gallery-thumb" src="/images/zine56.webp" alt="zine spread" loading="lazy" decoding="async">
-  <img class="gallery-thumb" src="/images/miadrawing (1).webp" alt="lime green halftone illustration" loading="lazy" decoding="async">
-  <img class="gallery-thumb" src="/images/Instagram-Mockup-With-Realistic-Shadow (3).webp" alt="instagram post" loading="lazy" decoding="async">
+  <img class="gallery-thumb" src="/images/objectandplay1.webp" alt="object play 1" loading="lazy" decoding="async">
+  <img class="gallery-thumb" src="/images/objectandplay2.webp" alt="object play 2" loading="lazy" decoding="async">
+  <img class="gallery-thumb" src="/images/objandplaypostermoc.webp" alt="poster mockup" loading="lazy" decoding="async">
+  <img class="gallery-thumb" src="/images/zine56.webp" alt="zine" loading="lazy" decoding="async">
+  <img class="gallery-thumb" src="/images/miadrawing (1).webp" alt="illustration" loading="lazy" decoding="async">
+  <img class="gallery-thumb" src="/images/Instagram-Mockup-With-Realistic-Shadow (3).webp" alt="instagram" loading="lazy" decoding="async">
   <img class="gallery-thumb" src="/images/pricelistmockup (1).webp" alt="price list" loading="lazy" decoding="async">
-  <img class="gallery-thumb" src="/images/object+playnooutline.webp" alt="object + play logo" loading="lazy" decoding="async">
+  <img class="gallery-thumb" src="/images/object+playnooutline.webp" alt="logo" loading="lazy" decoding="async">
 </div>
 </div>
 
@@ -55,9 +61,9 @@
 
 
 
-<div class="project-nav">
-  <a href="digital-threads.html">← digital threads</a>
-  <span class="project-nav-center">07 / 10</span>
+<div class="project-nav project-nav-sticky">
+  <a href="shaped-by-water.html">← shaped by water</a>
+  <span class="project-nav-center">07 / 11</span>
   <a href="missing-piece-fleur.html">next project →</a>
 </div>
 
@@ -87,11 +93,9 @@
   var lbCap   = document.getElementById('lbCaption');
   var lbMax   = document.getElementById('lbMaxBtn');
 
-  // Build image list: hero first, then thumbs
   if (mainImg) allImgs.push({ src: mainImg.src, alt: mainImg.alt });
   thumbs.forEach(function(t) { allImgs.push({ src: t.src, alt: t.alt }); });
 
-  // Click thumb: update main image
   thumbs.forEach(function(t, i) {
     t.style.cursor = 'pointer';
     t.addEventListener('click', function() {
@@ -102,7 +106,6 @@
     });
   });
 
-  // Click main image: open lightbox
   if (mainImg) {
     mainImg.style.cursor = 'zoom-in';
     mainImg.addEventListener('click', function() { openLb(curIdx); });
@@ -125,38 +128,23 @@
     lb.classList.remove('open', 'maximized');
     document.body.style.overflow = '';
   };
-
-  window.lbPrev = function() {
-    if (allImgs.length === 0) return;
-    openLb((curIdx - 1 + allImgs.length) % allImgs.length);
-  };
-
-  window.lbNext = function() {
-    if (allImgs.length === 0) return;
-    openLb((curIdx + 1) % allImgs.length);
-  };
-
+  window.lbPrev = function() { if (allImgs.length) openLb((curIdx - 1 + allImgs.length) % allImgs.length); };
+  window.lbNext = function() { if (allImgs.length) openLb((curIdx + 1) % allImgs.length); };
   window.lbMaximize = function() {
     if (!lb) return;
     lb.classList.toggle('maximized');
     if (lbMax) lbMax.textContent = lb.classList.contains('maximized') ? '\u229f restore' : '\u229e maximize';
   };
 
-  // Keyboard nav
   document.addEventListener('keydown', function(e) {
     if (!lb || !lb.classList.contains('open')) return;
-    if (e.key === 'Escape')      window.closeLightbox();
-    if (e.key === 'ArrowLeft')   window.lbPrev();
-    if (e.key === 'ArrowRight')  window.lbNext();
+    if (e.key === 'Escape')     window.closeLightbox();
+    if (e.key === 'ArrowLeft')  window.lbPrev();
+    if (e.key === 'ArrowRight') window.lbNext();
     if (e.key === 'f' || e.key === 'F') window.lbMaximize();
   });
 
-  // Close on backdrop click
-  if (lb) {
-    lb.addEventListener('click', function(e) {
-      if (e.target === lb) window.closeLightbox();
-    });
-  }
+  if (lb) lb.addEventListener('click', function(e) { if (e.target === lb) window.closeLightbox(); });
 })();
 </script>
 

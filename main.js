@@ -56,7 +56,7 @@
     title.textContent = p.title;
     desc.textContent = p.desc;
     btn.href = p.link;
-    sideNum.textContent = p.num + ' / 10';
+    sideNum.textContent = p.num + ' / 11';
     document.querySelectorAll('.hero-dot').forEach((d,i) => d.classList.toggle('active', i===idx));
     document.querySelectorAll('.side-item').forEach((s,i) => s.classList.toggle('active', i===idx));
   }
