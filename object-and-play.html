@@ -86,6 +86,7 @@
 (function() {
   var allImgs = [];
   var curIdx  = 0;
+  var wrap    = document.querySelector('.gallery-main-wrap');
   var mainImg = document.querySelector('.gallery-main');
   var thumbs  = document.querySelectorAll('.gallery-thumb');
   var lb      = document.getElementById('galleryLightbox');
@@ -93,26 +94,29 @@
   var lbCap   = document.getElementById('lbCaption');
   var lbMax   = document.getElementById('lbMaxBtn');
 
+  // Build image list: hero first, then thumbs
   if (mainImg) allImgs.push({ src: mainImg.src, alt: mainImg.alt });
   thumbs.forEach(function(t) { allImgs.push({ src: t.src, alt: t.alt }); });
 
+  // Click thumb: swap main + open lightbox
   thumbs.forEach(function(t, i) {
     t.style.cursor = 'pointer';
-    t.addEventListener('click', function() {
+    t.addEventListener('click', function(e) {
+      e.stopPropagation();
       curIdx = i + 1;
-      if (mainImg) { mainImg.src = allImgs[curIdx].src; }
+      if (mainImg) { mainImg.src = allImgs[curIdx].src; mainImg.alt = allImgs[curIdx].alt; }
       thumbs.forEach(function(x, j) { x.classList.toggle('active', j === i); });
       openLb(curIdx);
     });
   });
 
-  if (mainImg) {
-    mainImg.style.cursor = 'zoom-in';
-    mainImg.addEventListener('click', function() { openLb(curIdx); });
-  }
+  // Click main image OR wrap: open lightbox at current index
+  function handleMainClick() { openLb(curIdx); }
+  if (wrap)    { wrap.style.cursor = 'zoom-in'; wrap.addEventListener('click', handleMainClick); }
+  if (mainImg) { mainImg.style.cursor = 'zoom-in'; mainImg.addEventListener('click', function(e){ e.stopPropagation(); openLb(curIdx); }); }
 
   function openLb(idx) {
-    if (!lb || allImgs.length === 0) return;
+    if (!lb) return;
     curIdx = idx;
     lbImg.src = allImgs[idx].src;
     lbImg.alt = allImgs[idx].alt;
@@ -128,8 +132,8 @@
     lb.classList.remove('open', 'maximized');
     document.body.style.overflow = '';
   };
-  window.lbPrev = function() { if (allImgs.length) openLb((curIdx - 1 + allImgs.length) % allImgs.length); };
-  window.lbNext = function() { if (allImgs.length) openLb((curIdx + 1) % allImgs.length); };
+  window.lbPrev = function() { openLb((curIdx - 1 + allImgs.length) % allImgs.length); };
+  window.lbNext = function() { openLb((curIdx + 1) % allImgs.length); };
   window.lbMaximize = function() {
     if (!lb) return;
     lb.classList.toggle('maximized');

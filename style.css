@@ -1105,14 +1105,13 @@ footer {
 .hero-main-link {
   position: absolute;
   inset: 0;
-  z-index: 5;
+  z-index: 15;
   cursor: pointer;
   background: transparent;
   transition: background 0.3s;
   display: flex;
-  align-items: flex-end;
+  align-items: center;
   justify-content: center;
-  padding-bottom: 120px;
   text-decoration: none;
 }
 .hero-main-link:hover {
@@ -1121,27 +1120,32 @@ footer {
 .hero-view-label {
   opacity: 0;
   transition: opacity 0.3s;
-  font-size: 11px;
+  font-size: 13px;
   font-weight: 500;
   color: var(--brown);
-  letter-spacing: 0.1em;
+  letter-spacing: 0.12em;
   background: var(--pale-lime);
-  padding: 8px 20px;
+  padding: 10px 28px;
+  pointer-events: none;
 }
 .hero-main-link:hover .hero-view-label {
   opacity: 1;
 }
 
-/* Nav yellow highlight on homepage */
-.hero-nav-highlight nav a {
-  background: var(--pale-lime);
+/* Nav yellow highlight on homepage - behind each word */
+.hero-nav-highlight nav a,
+header.dark-header.hero-nav-highlight nav a {
+  background: var(--pale-lime) !important;
   color: var(--brown) !important;
-  padding: 2px 6px;
+  padding: 3px 8px !important;
+  box-decoration-break: clone;
+  -webkit-box-decoration-break: clone;
 }
-.hero-nav-highlight .logo {
-  background: var(--pale-lime);
+.hero-nav-highlight .logo,
+header.dark-header.hero-nav-highlight .logo {
+  background: var(--pale-lime) !important;
   color: var(--brown) !important;
-  padding: 2px 6px;
+  padding: 3px 8px !important;
 }
 
 /* Hero bg contain for certain projects */
