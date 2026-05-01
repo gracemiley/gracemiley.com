@@ -75,7 +75,7 @@
 <script src="main.js"></script>
 
 <script>
-(function() {
+document.addEventListener('DOMContentLoaded', function() {
   var allImgs = [];
   var curIdx  = 0;
   var wrap    = document.querySelector('.gallery-main-wrap');
@@ -86,11 +86,9 @@
   var lbCap   = document.getElementById('lbCaption');
   var lbMax   = document.getElementById('lbMaxBtn');
 
-  // Build image list: hero first, then thumbs
   if (mainImg) allImgs.push({ src: mainImg.src, alt: mainImg.alt });
   thumbs.forEach(function(t) { allImgs.push({ src: t.src, alt: t.alt }); });
 
-  // Click thumb: swap main + open lightbox
   thumbs.forEach(function(t, i) {
     t.style.cursor = 'pointer';
     t.addEventListener('click', function(e) {
@@ -102,25 +100,25 @@
     });
   });
 
-  // Click main image OR wrap: open lightbox at current index
-  function handleMainClick() { openLb(curIdx); }
-  if (wrap)    { wrap.style.cursor = 'zoom-in'; wrap.addEventListener('click', handleMainClick); }
-  if (mainImg) { mainImg.style.cursor = 'zoom-in'; mainImg.addEventListener('click', function(e){ e.stopPropagation(); openLb(curIdx); }); }
+  if (wrap) { wrap.style.cursor = 'zoom-in'; wrap.addEventListener('click', function() { openLb(curIdx); }); }
+  if (mainImg) { mainImg.addEventListener('click', function(e) { e.stopPropagation(); openLb(curIdx); }); }
 
   function openLb(idx) {
-    if (!lb) return;
+    if (!lb) { alert('no lightbox found'); return; }
     curIdx = idx;
     lbImg.src = allImgs[idx].src;
     lbImg.alt = allImgs[idx].alt;
     if (lbCap) lbCap.textContent = (idx + 1) + ' / ' + allImgs.length;
+    lb.style.display = 'flex';
     lb.classList.add('open');
     lb.classList.remove('maximized');
-    if (lbMax) lbMax.textContent = '\u229e maximize';
+    if (lbMax) lbMax.textContent = '⊞ maximize';
     document.body.style.overflow = 'hidden';
   }
 
   window.closeLightbox = function() {
     if (!lb) return;
+    lb.style.display = 'none';
     lb.classList.remove('open', 'maximized');
     document.body.style.overflow = '';
   };
@@ -129,11 +127,11 @@
   window.lbMaximize = function() {
     if (!lb) return;
     lb.classList.toggle('maximized');
-    if (lbMax) lbMax.textContent = lb.classList.contains('maximized') ? '\u229f restore' : '\u229e maximize';
+    if (lbMax) lbMax.textContent = lb.classList.contains('maximized') ? '⊟ restore' : '⊞ maximize';
   };
 
   document.addEventListener('keydown', function(e) {
-    if (!lb || !lb.classList.contains('open')) return;
+    if (!lb || lb.style.display === 'none') return;
     if (e.key === 'Escape')     window.closeLightbox();
     if (e.key === 'ArrowLeft')  window.lbPrev();
     if (e.key === 'ArrowRight') window.lbNext();
@@ -141,10 +139,10 @@
   });
 
   if (lb) lb.addEventListener('click', function(e) { if (e.target === lb) window.closeLightbox(); });
-})();
+});
 </script>
 
-<div class="gallery-lightbox" id="galleryLightbox">
+<div class="gallery-lightbox" id="galleryLightbox" style="display:none">
   <button class="gallery-lightbox-close" onclick="closeLightbox()">&#215;</button>
   <button class="gallery-maximize-btn" id="lbMaxBtn" onclick="lbMaximize()">&#8862; maximize</button>
   <button class="gallery-lightbox-prev" onclick="lbPrev()">&#8592;</button>

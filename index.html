@@ -547,6 +547,11 @@ footer {
 .about-skill-tools { font-size: 10px; font-weight: 300; color: rgba(44,26,14,0.6); line-height: 1.6; }
 .about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: start; margin-bottom: 60px; }
 </style>
+<style>
+#heroLink:hover { background: rgba(240,234,191,0.30) !important; }
+#heroLink:hover .hero-view-label { opacity: 1 !important; }
+.hero-view-label { opacity:0; transition:opacity 0.3s; font-size:13px; font-weight:500; color:#2C1A0E; letter-spacing:0.12em; background:#f0eabf; padding:10px 28px; pointer-events:none; }
+</style>
 </head>
 <body>
 
@@ -573,7 +578,7 @@ footer {
     </div>
     <div class="hero-dots" id="heroDots"></div>
     <div class="hero-scroll">scroll ↓</div>
-    <a class="hero-main-link" id="heroLink" href="#"><span class="hero-view-label">view project</span></a>
+    <div class="hero-main-link" id="heroLink" onclick="window.location.href=document.getElementById('heroBtn').href" style="position:absolute;inset:0;z-index:15;cursor:pointer;background:transparent;transition:background 0.3s;display:flex;align-items:center;justify-content:center;"><span class="hero-view-label">view project</span></div>
   </div>
   <div class="hero-sidebar" id="heroSidebar">
     <span class="side-num" id="sideNum">01 / 09</span>
