@@ -1170,18 +1170,27 @@ header.dark-header.hero-nav-highlight .logo {
   align-items: center;
   justify-content: center;
   cursor: pointer;
-  color: var(--off-white);
-  font-size: 14px;
+  font-size: 12px;
+  font-family: 'DM Sans', sans-serif;
+  font-weight: 400;
+  letter-spacing: 0.04em;
   transition: color 0.2s;
   background: none;
   border: none;
   padding: 0;
-  font-family: inherit;
+  color: rgba(44,26,14,0.6);
 }
 
-header.solid .search-icon { color: var(--brown); }
-header.dark-header .search-icon { color: var(--off-white); }
-header.hero-nav-highlight .search-icon { background: var(--pale-lime) !important; color: var(--brown) !important; padding: 3px 8px !important; }
+/* Match nav link colors exactly */
+header.solid .search-icon { color: rgba(44,26,14,0.6); }
+header.solid .search-icon:hover { color: var(--brown); }
+header.dark-header .search-icon { color: rgba(250,250,245,0.75); }
+header.dark-header .search-icon:hover { color: var(--off-white); }
+header.hero-nav-highlight .search-icon {
+  background: var(--pale-lime) !important;
+  color: var(--brown) !important;
+  padding: 3px 8px !important;
+}
 
 .search-input-wrap {
   position: absolute;
@@ -1194,7 +1203,7 @@ header.hero-nav-highlight .search-icon { background: var(--pale-lime) !important
 }
 
 .search-input-wrap.open {
-  width: 200px;
+  width: 180px;
 }
 
 .search-input {
@@ -1202,13 +1211,31 @@ header.hero-nav-highlight .search-icon { background: var(--pale-lime) !important
   font-family: 'DM Sans', sans-serif;
   font-size: 11px;
   font-weight: 400;
-  color: var(--brown);
-  background: var(--off-white);
-  border: 1px solid rgba(44,26,14,0.2);
-  padding: 6px 12px;
-  outline: none;
   letter-spacing: 0.04em;
   text-transform: lowercase;
+  outline: none;
+  border: none;
+  border-bottom: 1px solid currentColor;
+  padding: 4px 0;
+  background: transparent;
+  color: inherit;
+}
+
+/* On solid header (work/project pages): brown text */
+header.solid .search-input {
+  color: rgba(44,26,14,0.7);
+  border-bottom-color: rgba(44,26,14,0.3);
+}
+
+/* On dark hero header (homepage): off-white text */
+header.dark-header .search-input {
+  color: rgba(250,250,245,0.85);
+  border-bottom-color: rgba(250,250,245,0.4);
+}
+
+.search-input::placeholder {
+  color: inherit;
+  opacity: 0.5;
 }
 
 .search-dropdown {
