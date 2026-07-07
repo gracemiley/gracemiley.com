@@ -101,3 +101,84 @@ projects.forEach((p, i) => {
     });
   });
 })();
+
+// Search bar
+(function() {
+  var projects = [
+    { title: 'go with your gut bag', cats: 'soft goods fabrication product design wearables branding', url: 'go-with-your-gut-bag.html' },
+    { title: 'ant farm office', cats: 'wearables branding soft goods product design game design graphics uniform story creative direction', url: 'ant-farm-office.html' },
+    { title: 'digital threads', cats: 'editorial design publication ux social impact zine irc resettlement digital literacy', url: 'digital-threads.html' },
+    { title: 'gria studio', cats: 'branding identity creative direction product design studio co-founder', url: 'gria-studio.html' },
+    { title: 'gjso soundscapes', cats: 'branding graphic design print identity system symphony orchestra grand junction posters banners', url: 'gjso-soundscapes.html' },
+    { title: 'shaped by water', cats: 'branding print exhibition toy design fabrication great salt lake resin crayon posters pamphlets', url: 'shaped-by-water.html' },
+    { title: 'object + play', cats: 'event design print editorial illustration branding gala salt lake city zine poster', url: 'object-and-play.html' },
+    { title: 'missing piece / fleur', cats: 'product design branding packaging 3d design research fragrance phlur tech pack', url: 'missing-piece-fleur.html' },
+    { title: 'barriers', cats: 'game design 3d installation character design print interactive cave arduino unity millcreek', url: 'barriers.html' },
+    { title: 'nrhh swoop chapter', cats: 'branding identity social media merch illustration university of utah residential life duck logo', url: 'nrhh-swoop.html' },
+    { title: 'imogen jacket', cats: 'soft goods wearables fashion design fabrication pattern making tech pack clo3d memory garment', url: 'imogen-jacket.html' },
+  ];
+
+  function initSearch() {
+    var wrap = document.querySelector('.search-wrap');
+    if (!wrap) return;
+
+    var icon     = wrap.querySelector('.search-icon');
+    var inputWrap = wrap.querySelector('.search-input-wrap');
+    var input    = wrap.querySelector('.search-input');
+    var dropdown = wrap.querySelector('.search-dropdown');
+
+    icon.addEventListener('click', function(e) {
+      e.stopPropagation();
+      inputWrap.classList.toggle('open');
+      dropdown.classList.remove('open');
+      if (inputWrap.classList.contains('open')) {
+        input.focus();
+        input.value = '';
+      }
+    });
+
+    input.addEventListener('input', function() {
+      var q = input.value.trim().toLowerCase();
+      dropdown.innerHTML = '';
+      if (!q) { dropdown.classList.remove('open'); return; }
+
+      var matches = projects.filter(function(p) {
+        return p.title.toLowerCase().includes(q) || p.cats.toLowerCase().includes(q);
+      });
+
+      if (matches.length === 0) {
+        dropdown.innerHTML = '<div class="search-no-results">no results for "' + q + '"</div>';
+      } else {
+        matches.forEach(function(p) {
+          var a = document.createElement('a');
+          a.className = 'search-result';
+          a.href = p.url;
+          a.innerHTML = '<span class="search-result-title">' + p.title + '</span><span class="search-result-cat">' + p.cats.split(' ').slice(0,4).join(' · ') + '</span>';
+          dropdown.appendChild(a);
+        });
+      }
+      dropdown.classList.add('open');
+    });
+
+    input.addEventListener('keydown', function(e) {
+      if (e.key === 'Escape') {
+        inputWrap.classList.remove('open');
+        dropdown.classList.remove('open');
+        input.blur();
+      }
+    });
+
+    document.addEventListener('click', function(e) {
+      if (!wrap.contains(e.target)) {
+        inputWrap.classList.remove('open');
+        dropdown.classList.remove('open');
+      }
+    });
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initSearch);
+  } else {
+    initSearch();
+  }
+})();
