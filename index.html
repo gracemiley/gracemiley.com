@@ -633,12 +633,10 @@ header.solid .search-input { color: rgba(44,26,14,0.7); border-bottom-color: rgb
     <a href="index.html#about">about</a>
     <a href="contact.html">contact</a>
   </nav>
-  <div class="search-wrap">
-    <button class="search-icon" aria-label="search">&#9906;</button>
-    <div class="search-input-wrap">
-      <input class="search-input" type="text" placeholder="search projects...">
-    </div>
-    <div class="search-dropdown"></div>
+  <div id="siteSearch" style="position:relative;pointer-events:all;z-index:9999;display:flex;align-items:center;gap:8px;">
+    <button id="searchToggle" style="background:none;border:none;cursor:pointer;font-family:DM Sans,sans-serif;font-size:12px;font-weight:400;letter-spacing:0.04em;color:rgba(250,250,245,0.75);pointer-events:all;padding:0;transition:color 0.2s;">search</button>
+    <input id="searchInput" type="text" placeholder="type to search..." style="display:none;font-family:DM Sans,sans-serif;font-size:11px;font-weight:400;letter-spacing:0.04em;text-transform:lowercase;background:transparent;border:none;border-bottom:1px solid rgba(250,250,245,0.4);color:rgba(250,250,245,0.85);outline:none;padding:4px 0;width:160px;">
+    <div id="searchDropdown" style="display:none;position:absolute;top:calc(100% + 12px);right:0;width:280px;background:#FAFAF5;border:1px solid rgba(44,26,14,0.12);box-shadow:0 8px 24px rgba(44,26,14,0.12);z-index:9999;"></div>
   </div>
 </header>
 
@@ -878,6 +876,107 @@ header.solid .search-input { color: rgba(44,26,14,0.7); border-bottom-color: rgb
 
   show(0);
   startTimer();
+})();
+</script>
+
+<script>
+(function() {
+  var projects = [
+    { title: 'go with your gut bag', cats: 'soft goods fabrication product design wearables branding tech pack clo3d', url: 'go-with-your-gut-bag.html' },
+    { title: 'ant farm office', cats: 'wearables branding soft goods product design game design graphics uniform story', url: 'ant-farm-office.html' },
+    { title: 'digital threads', cats: 'editorial design publication ux social impact zine irc resettlement digital literacy', url: 'digital-threads.html' },
+    { title: 'gria studio', cats: 'branding identity creative direction product design studio co-founder', url: 'gria-studio.html' },
+    { title: 'gjso soundscapes', cats: 'branding graphic design print identity system symphony orchestra grand junction posters', url: 'gjso-soundscapes.html' },
+    { title: 'shaped by water', cats: 'branding print exhibition toy design fabrication great salt lake resin crayon', url: 'shaped-by-water.html' },
+    { title: 'object + play', cats: 'event design print editorial illustration branding gala salt lake city zine poster', url: 'object-and-play.html' },
+    { title: 'missing piece / fleur', cats: 'product design branding packaging 3d design research fragrance phlur tech pack', url: 'missing-piece-fleur.html' },
+    { title: 'barriers', cats: 'game design 3d installation character design print interactive cave arduino unity', url: 'barriers.html' },
+    { title: 'nrhh swoop chapter', cats: 'branding identity social media merch illustration university of utah residential duck', url: 'nrhh-swoop.html' },
+    { title: 'imogen jacket', cats: 'soft goods wearables fashion design fabrication pattern making tech pack clo3d memory', url: 'imogen-jacket.html' },
+  ];
+
+  var btn      = document.getElementById('searchToggle');
+  var input    = document.getElementById('searchInput');
+  var dropdown = document.getElementById('searchDropdown');
+  var wrap     = document.getElementById('siteSearch');
+
+  if (!btn || !input || !dropdown) return;
+
+  var open = false;
+
+  btn.addEventListener('click', function(e) {
+    e.stopPropagation();
+    open = !open;
+    if (open) {
+      input.style.display = 'block';
+      input.focus();
+      dropdown.style.display = 'none';
+      dropdown.innerHTML = '';
+    } else {
+      input.style.display = 'none';
+      dropdown.style.display = 'none';
+      input.value = '';
+    }
+  });
+
+  input.addEventListener('input', function() {
+    var q = this.value.trim().toLowerCase();
+    dropdown.innerHTML = '';
+    if (!q) { dropdown.style.display = 'none'; return; }
+
+    var matches = projects.filter(function(p) {
+      return p.title.toLowerCase().indexOf(q) !== -1 || p.cats.toLowerCase().indexOf(q) !== -1;
+    });
+
+    if (matches.length === 0) {
+      dropdown.innerHTML = '<div style="padding:12px 16px;font-size:11px;font-weight:300;color:#9C9A92;font-family:DM Sans,sans-serif;">no results for “' + q + '”</div>';
+    } else {
+      matches.forEach(function(p) {
+        var a = document.createElement('a');
+        a.href = p.url;
+        a.style.cssText = 'display:block;padding:12px 16px;text-decoration:none;border-bottom:1px solid rgba(44,26,14,0.06);transition:background 0.15s;font-family:DM Sans,sans-serif;';
+        a.innerHTML = '<span style="font-size:12px;font-weight:500;color:#2C1A0E;display:block;margin-bottom:2px;text-transform:lowercase;">' + p.title + '</span><span style="font-size:10px;font-weight:300;color:#9C9A92;letter-spacing:0.04em;">' + p.cats.split(' ').slice(0,4).join(' · ') + '</span>';
+        a.addEventListener('mouseover', function() { this.style.background = '#E8EFA8'; });
+        a.addEventListener('mouseout',  function() { this.style.background = ''; });
+        dropdown.appendChild(a);
+      });
+    }
+    dropdown.style.display = 'block';
+  });
+
+  input.addEventListener('keydown', function(e) {
+    if (e.key === 'Escape') {
+      open = false;
+      input.style.display = 'none';
+      dropdown.style.display = 'none';
+      input.value = '';
+    }
+  });
+
+  document.addEventListener('click', function(e) {
+    if (wrap && !wrap.contains(e.target)) {
+      open = false;
+      input.style.display = 'none';
+      dropdown.style.display = 'none';
+      input.value = '';
+    }
+  });
+
+  // Update search color when header switches between dark/solid
+  var observer = new MutationObserver(function() {
+    var header = document.querySelector('header');
+    if (header && header.classList.contains('solid')) {
+      btn.style.color = 'rgba(44,26,14,0.6)';
+      input.style.color = 'rgba(44,26,14,0.7)';
+      input.style.borderBottomColor = 'rgba(44,26,14,0.3)';
+    } else {
+      btn.style.color = 'rgba(250,250,245,0.75)';
+      input.style.color = 'rgba(250,250,245,0.85)';
+      input.style.borderBottomColor = 'rgba(250,250,245,0.4)';
+    }
+  });
+  var header = document.querySelector('header');
+  if (header) observer.observe(header, { attributes: true, attributeFilter: ['class'] });
 })();
 </script>
 </body>
