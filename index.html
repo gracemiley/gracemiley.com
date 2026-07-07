@@ -548,13 +548,14 @@ footer {
 .about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: start; margin-bottom: 60px; }
 
 /* ============ SEARCH (inline override) ============ */
-.search-wrap { position: relative; display: flex; align-items: center; pointer-events: all; }
+.search-wrap { position: relative; display: flex; align-items: center; pointer-events: all; z-index: 200; }
 
 .search-icon {
   background: none;
   border: none;
   padding: 0;
   cursor: pointer;
+  pointer-events: all;
   font-family: 'DM Sans', sans-serif;
   font-size: 12px;
   font-weight: 400;
@@ -653,7 +654,7 @@ header.solid .search-input { color: rgba(44,26,14,0.7); border-bottom-color: rgb
     </div>
     <div class="hero-dots" id="heroDots"></div>
     <div class="hero-scroll">scroll ↓</div>
-    <div class="hero-main-link" id="heroLink" onclick="window.location.href=document.getElementById('heroBtn').href" style="position:absolute;inset:0;z-index:15;cursor:pointer;background:transparent;transition:background 0.3s;display:flex;align-items:center;justify-content:center;"><span class="hero-view-label">view project</span></div>
+    <div class="hero-main-link" id="heroLink" onclick="window.location.href=document.getElementById('heroBtn').href" style="position:absolute;inset:0;top:60px;z-index:15;cursor:pointer;background:transparent;transition:background 0.3s;display:flex;align-items:center;justify-content:center;"><span class="hero-view-label">view project</span></div>
   </div>
   <div class="hero-sidebar" id="heroSidebar">
     <span class="side-num" id="sideNum">01 / 09</span>
